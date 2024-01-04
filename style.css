@@ -1,0 +1,263 @@
+*,/*todos los elementos*/
+*::before, /*para asegurar que los elementos generados por CSS de forma dinámica también sigan estas reglas*/
+*::after {
+  box-sizing: border-box; /* sin esta regla, el ancho y alto de un elemento se calcula sin tener en cuenta el relleno y el borde*/
+  margin: 0;  /* para garantizar que no haya márgenes o rellenos no deseados aplicados de forma predeterminada por el navegador*/
+  padding: 0;
+}
+
+:root {
+    --color-nav: #DEB992;
+    --color-section: #D48166;
+}
+
+body{
+    display: grid;
+    grid-template-rows: 0.1fr 1fr 3fr 0.5fr;
+    grid-template-areas:
+        "header"
+        "nav"
+        "main"
+        "footer";
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
+header {
+    grid-area: header;
+    width: 100%;
+    position: fixed;
+    height: 10%;
+    z-index: 1;
+}
+
+header, footer{
+    display: flex;
+    align-items: center;
+    background-color: black;
+    color: white;
+}
+
+header p{
+    margin-left: 0.5em;
+}
+
+header span {
+    font-weight: bolder;
+}
+
+nav {
+    background-color: var(--color-nav);
+    color: white;
+    grid-area: nav;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#titulo {
+    margin-bottom: 0.5em;
+    font-size: 5vh;
+    font-weight: bolder;
+}
+
+nav a {
+    color: white;
+    border: 1px solid white;
+    padding: 1em;
+    padding-right: 3em;
+    padding-left: 3em;
+    font-weight: bolder;
+}
+
+nav a:hover {
+    background-color: #dfbe9b;
+}
+
+main {
+    grid-area: main;
+}
+
+section{
+    display:flex;
+    flex-direction: row-reverse; /*Secciones pares*/
+}
+
+/*Secciones impares*/
+section:nth-child(odd) {
+    flex-direction: row;
+    text-align: right;
+}
+
+figure{
+    overflow: hidden;
+    width: 50%;
+    height: 30em;
+    position: relative; 
+}
+
+img{
+    width: 160%;  
+    height: 100%;
+    position: absolute; 
+    top: 60%; 
+    left: 80%; 
+    transform: translate(-80%, -60%);
+}
+
+article{
+    border: 4em solid white;
+    width: 50%;
+}
+
+hr{
+    border-color: lightgray;
+    opacity: 0.3;
+}
+
+/*Primer a de los article*/
+article a:first-child {
+    font-size: xx-large;
+    font-weight: bolder;
+    display: inline-block;
+    margin-bottom: 0.5em;
+}
+
+/*Primer p de los article*/
+article p:first-of-type {
+    font-style: italic;
+    color: lightgray;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+/*Segundo p de los article*/
+article p:nth-of-type(2) {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    text-align: justify;
+    text-align-last: right;
+    margin-bottom: 3vh;
+}
+
+/*Último a de los article*/
+article a:last-of-type {
+    border: 1px solid lightgray;
+    width: 5em;
+    padding: 1vh;
+    padding-left: 3vh;
+    padding-right: 3vh;
+}
+
+/*Último a de los article impares*/
+section:nth-child(odd) article a:last-of-type:link, section:nth-child(odd) article a:last-of-type:visited {
+    color: var(--color-section);
+    font-weight: bolder;
+    text-decoration: none;
+}
+
+/*Primer a y span de los article impares*/
+section:nth-child(odd) article a:first-child,
+section:nth-child(odd) article span:first-child {
+    color: var(--color-section);
+}
+
+section:nth-child(odd) article a:last-of-type:hover{
+    background-color: rgb(248, 248, 248);
+}
+
+/*Articles pares*/
+section:nth-child(even) article{
+    color: white;
+    border-color: var(--color-section);
+    background-color: var(--color-section);
+}
+
+/*Primer a y primer span de los articles pares*/
+section:nth-child(even) article a:first-child, section:nth-child(even) article span:first-child{
+    color: white;
+}
+
+/*Primer p de los article pares y hr*/
+section:nth-child(even) article p:nth-of-type(1), section:nth-child(even) article hr {
+    color: #f5b7a1;
+    border-color: white;
+}
+
+/*Segundo p de los article pares*/
+section:nth-child(even) article p:nth-of-type(2) {
+    text-align-last: left;
+}
+
+/*Último a de los articles pares*/
+section:nth-child(even) article a:last-of-type:link, section:nth-child(even) article a:last-of-type:visited {
+    color: white;
+    font-weight: bolder;
+    text-decoration: none;
+}
+
+section:nth-child(even) article a:last-of-type:hover{
+    background-color: #d38d75;
+}
+
+/*Footer*/
+footer {
+    grid-area: footer;
+    justify-content: center;
+    color: gray
+}
+
+footer a:link, footer a:visited {
+  color: gray; 
+  text-decoration: none;
+}
+
+footer a:hover, footer a:focus {
+  color: lightgray;  
+}
+
+article a:first-child:hover, article span:first-child:hover, footer a:hover {
+    text-decoration: underline;
+}
+
+/*Responsive*/
+@media (max-width: 70em) {
+    body {
+        grid-template-rows: 0.05fr 1fr 3fr 0.5fr;
+    }
+
+    section,section:nth-child(odd) {
+        flex-direction: column;
+    }
+
+    figure, article {
+        width: 100%;
+    }
+
+    figure {
+        order: 1;
+    }
+
+    article {
+        order: 2;
+    }
+
+    article p:first-of-type, article p:nth-of-type(2) {
+        text-align: left;
+    }
+
+    article p:nth-of-type(2) {
+        text-align-last: left;
+    }
+
+    section:nth-child(odd) {
+        text-align: left;
+    }
+}
